@@ -1,36 +1,51 @@
-# I2C Example
+# Unit Testing
 
- This example shows how to use I2C for inter-device communication.
+ This code will create a task to run unit tests on two functions: adcResToVoltageWhole and adcResToVoltageFrac.
+ The Units Under Test are:
+ adcResToVoltageWhole() returns whole number part of voltage value corresponding to ADC result, and
+ adcResToVoltageFrac() returns fractional part of voltage value corresponding to ADC result
 
 # Important Files
 
  Source file: main/user_main.c,
- Output file: main/lab1_q3_816005001.out,
+ Output file: main/lab3_q1_816005001.out,
  Binary file: build/i2c.bin
+
+# Test file
+
+ There is no explicit test file. The unit_test_task in main/user_main.c does the job of a test driver in this code.
 
 # Pin Assignment
 
-* Master (ESP8266):
-    * GPIO2 is assigned as the data signal of i2c master port
-    * GPIO0 is assigned as the clock signal of i2c master port
+ N/A
 
 # Hardware Required
 
- Connection: connect sda/scl of sensor with GPIO2/GPIO0
+ None
 
 # Example Output  
 
 ```
 
-I (0) gpio: GPIO[2]| InputEn: 0| OutputEn: 1| OpenDrain: 1| Pullup: 0| Pulldown: 0| Intr:0
-I (0) gpio: GPIO[0]| InputEn: 0| OutputEn: 1| OpenDrain: 1| Pullup: 0| Pulldown: 0| Intr:0
-Inside app_main
-Inside task_example
+I () main: Unit testing task
+I () main: UUTs: adcResToVoltageWhole(), adcResToVoltageFrac()
+I () main: adcResToVoltageWhole() returns whole number part of voltage value corresponding to ADC result
+I () main: adcResToVoltageFrac() returns fractional part of voltage value corresponding to ADC result
 
-I (0) main: ADC Result: xxxx
+I () main: Test case 1: ADC result: 0x0 [0]
+I () main: Expected output > Whole: 0, Fraction: 0 / 16000
 
-I (0) main: ADC Result: xxxx
+I () main: Test case 2: ADC result: 0xa [10]
+I () main: Expected output > Whole: 0, Fraction: 10 / 16000
 
-I (0) main: ADC Result: xxxx
+I () main: Test case 3: ADC result: 0x5e1f [24095]
+I () main: Expected output > Whole: 1, Fraction: 8095 / 16000
+
+I () main: Test case 4: ADC result: 0x6c1f [27679]
+I () main: Expected output > Whole: 1, Fraction: 11679 / 16000
+
+I () main: Test case 5: ADC result: 0xffff [65535]
+I () main: Expected output > Whole: 4, Fraction: 1535 / 16000
+
 
 ```
